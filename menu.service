@@ -1,0 +1,13 @@
+[Unit]
+Description=Node GPIO
+After=network.target
+
+[Service]
+WorkingDirectory=/root/CHIP-simple-menu
+Environment=NODE_ENV=production PORT=1337
+ExecStart=/usr/bin/node menu.js
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
