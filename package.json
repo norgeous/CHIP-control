@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/norgeous/CHIP-simple-menu.git"
+    "url": "git+https://github.com/norgeous/CHIP-control.git"
   },
   "keywords": [
     "CHIP"
@@ -16,9 +16,9 @@
   "author": "norgeous",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/norgeous/CHIP-simple-menu/issues"
+    "url": "https://github.com/norgeous/CHIP-control/issues"
   },
-  "homepage": "https://github.com/norgeous/CHIP-simple-menu#readme",
+  "homepage": "https://github.com/norgeous/CHIP-control#readme",
   "dependencies": {
     "chip-io": "^2.1.1",
     "johnny-five": "^0.10.6",

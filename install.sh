@@ -6,31 +6,31 @@ if [[ $EUID -ne 0 ]]; then
   exit 1
 fi
 
-if (whiptail --title "Button Menu" --yesno "Install button menu?" 15 46) then
+if (whiptail --title "CHIP-control install" --yesno "Install CHIP-control?" 15 46) then
 
-# installl git
-if ! which git >/dev/null; then
-  apt install -y git
-fi
+  # install git
+  if ! which git >/dev/null; then
+    apt install -y git
+  fi
 
-# install node
-if ! which node >/dev/null; then
-  echo "nodejs is not installed!"
-  bash <(curl -sL "https://rawgit.com/norgeous/CHIP-customiser/master/scripts/install_nodejs.sh")
-fi
+  # install node
+  if ! which node >/dev/null; then
+    echo "nodejs is not installed!"
+    bash <(curl -sL "https://rawgit.com/norgeous/CHIP-customiser/master/scripts/install_nodejs.sh")
+  fi
 
-bash <(curl -sL "https://rawgit.com/norgeous/CHIP-customiser/master/scripts/configure_status_led.sh")
+  bash <(curl -sL "https://rawgit.com/norgeous/CHIP-customiser/master/scripts/configure_status_led.sh")
 
-# clone this repo
-rm -r "/root/CHIP-simple-menu/"
-cd "/root/"
-git clone "https://github.com/norgeous/CHIP-simple-menu.git"
-cd "/root/CHIP-simple-menu/"
-sudo npm install # needs sudo, even as root
+  # clone this repo
+  rm -r "/root/CHIP-control/"
+  cd "/root/"
+  git clone "https://github.com/norgeous/CHIP-control.git"
+  cd "/root/CHIP-control/"
+  sudo npm install # needs sudo, even as root
 
-# menu.service
-mv "/root/CHIP-simple-menu/menu.service" "/etc/systemd/system/menu.service"
-systemctl enable menu
-systemctl restart menu
+  # chip-control.service
+  mv "/root/CHIP-control/chip-control.service" "/etc/systemd/system/chip-control.service"
+  systemctl enable chip-control
+  systemctl restart chip-control
 
 fi

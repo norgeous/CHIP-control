@@ -3,6 +3,20 @@ var chipio = require('chip-io')
 var fs = require('fs')
 var exec = require('child_process').exec
 var execSync = require('child_process').execSync
+var io = require('socket.io')();
+
+
+io.on('connect', function(client){
+  console.log('new customer');
+});
+
+io.listen(3111);
+
+setInterval(function(){
+  io.emit('broadcast', {some:'value'});
+},1000);
+
+
 
 var menu = require('./scripts').menu
 var say = require('./scripts').say

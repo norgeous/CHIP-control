@@ -1,11 +1,11 @@
 [Unit]
-Description=Node GPIO
+Description=CHIP-control
 After=network.target
 
 [Service]
-WorkingDirectory=/root/CHIP-simple-menu
+WorkingDirectory=/root/CHIP-control
 Environment=NODE_ENV=production PORT=1337
-ExecStart=/usr/bin/node menu.js
+ExecStart=/usr/bin/node index.js
 Restart=always
 RestartSec=10
 
