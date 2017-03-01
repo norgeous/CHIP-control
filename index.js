@@ -24,7 +24,7 @@ board.on('ready', function() {
   var voltmeter = new chipio.BatteryVoltage()
 
   thermometer.on('change', function(data) {
-    io.emit('temperature', data.celsius;
+    io.emit('temperature', data.celsius);
   })
   
   voltmeter.on('change', function(v) {
