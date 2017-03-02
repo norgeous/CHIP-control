@@ -1,9 +1,7 @@
-import React, {
-  PureComponent
-}                       from 'react';
-import {Jumbotron}      from '../../components';
-import cx             from 'classnames';
-import { Link }       from 'react-router';
+import React, { PureComponent} from 'react';
+import {Jumbotron, Graph}      from '../../components';
+import cx                      from 'classnames';
+import { Link }                from 'react-router';
 
 class Home extends PureComponent {
   state = {
@@ -43,6 +41,7 @@ class Home extends PureComponent {
             </Link>
           </p>
         </Jumbotron>
+        <Graph />
       </div>
     );
   }

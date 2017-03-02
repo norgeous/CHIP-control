@@ -4,6 +4,7 @@ const Jumbotron = (props) => {
   return (
     <div className="jumbotron">
       {props.children}
+      hello
     </div>
   );
 };
