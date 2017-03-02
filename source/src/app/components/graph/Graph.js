@@ -13,29 +13,31 @@ class Graph extends Component {
     super(props);
 
     this.state = {
-      data: {
-        temperature: 0
-      }
+      temperature: []
     };
   }
 
-  componentDidMount() {    
-    socket.on('server:event', data => {
-      this.setState({ data });
-    })
-    socket.on('temperature', t => {
-      this.setState({
-        data: {
-          currenttemperature: t
-        }
+  componentDidMount() {
+    const me = this;
+    socket.on('temperature', o => {
+
+      console.log(me.state.temperature)
+      me.setState({
+        temperature: me.state.temperature.concat([o])
       });
+
     })
   }
   
   render() {
-    const { cityname, forecast } = this.state;
+    const { temperature } = this.state;
     return (
-      <div className="Graph">a Graph {this.state.data.currenttemperature}
+      <div className="Graph">
+        {temperature.map((datapoint, i) =>
+          <div key={i}>
+            {datapoint.time}: {datapoint.value}
+          </div>
+        )}
       </div>
     );
   }
