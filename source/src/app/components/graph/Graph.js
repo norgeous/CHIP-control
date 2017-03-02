@@ -26,20 +26,16 @@ class Graph extends Component {
     socket.on('temperature', t => {
       this.setState({
         data: {
-          temperature: t
+          currenttemperature: t
         }
       });
     })
-  }
-
-  sendMessage = message => {
-    socket.emit('client:sendMessage', message);
   }
   
   render() {
     const { cityname, forecast } = this.state;
     return (
-      <div className="Graph">a Graph{this.state.data.temperature.toFixed(1)}
+      <div className="Graph">a Graph {this.state.data.currenttemperature}
       </div>
     );
   }

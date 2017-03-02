@@ -24,13 +24,18 @@ board.on('ready', function() {
   var voltmeter = new chipio.BatteryVoltage()
 
   thermometer.on('change', function(data) {
-    io.emit('temperature', data.celsius);
+    io.emit('temperature', {
+      time: new Date().getTime(),
+      value: data.celsius
+    });
   })
   
-  voltmeter.on('change', function(v) {
-    io.emit('voltage', v);
+  voltmeter.on('change', function(volts) {
+    io.emit('voltage', {
+      time: new Date().getTime(),
+      value: volts
+    });
   });
-
 
   onboardButton.on('up', function() {
     
