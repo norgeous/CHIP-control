@@ -61,7 +61,7 @@ class Graph extends Component {
         <br/>
         <VictoryChart width={3000} height={600}>
           <VictoryAxis />
-          <VictoryAxis dependentAxis domain={[0,4.2]}/>
+          <VictoryAxis dependentAxis domain={[3.2,4.2]}/>
           <VictoryLine
             style={{ data: { stroke: "blue" }}}
             data={voltage}
