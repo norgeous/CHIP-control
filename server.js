@@ -24,10 +24,11 @@ board.on('ready', function() {
   var thermometer = new chipio.InternalTemperature()
   var history_temperature = [];
   thermometer.on('change', function(data) {
-    if(history_temperature.length<10) history_temperature.push(data.celsius);
+    if(history_temperature.length<100) history_temperature.push(data.celsius);
     else {
       var sum = history_temperature.reduce(function(a, b) { return a + b; });
-      var average = (sum / history_temperature.length).toFixed(2);
+      var average = sum / history_temperature.length;
+      //var average = (sum / history_temperature.length).toFixed(2);
       io.emit('temperature', {
         time: new Date().getTime(),
         value: average

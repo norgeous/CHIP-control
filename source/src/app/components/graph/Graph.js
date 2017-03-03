@@ -68,10 +68,6 @@ class Graph extends Component {
             x="time"
             y="value"
           />
-          <VictoryAxis
-            style={{ data: { stroke: "red" }}}
-            offsetX={3}
-          />
         </VictoryChart>
         {voltage.length}<br/>{voltage.length?voltage[voltage.length-1].value:''}
         {/*<LineChart margins={{left: 100, right: 100, top: 50, bottom: 50}} title="test2" data={temperature} width={1500} height={400} chartSeries={[{field:'value', name:'Temperature', color:'#ff7f0e', area:true}]} x={function(d){return d.time;}} xScale="time" yScale="linear" yLabel="Temperature (°C)" xLabel="Time" yDomain={[35,55]}/>
