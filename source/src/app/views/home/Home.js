@@ -18,7 +18,7 @@ class Home extends PureComponent {
           'animatedViews': animated,
           'view-enter': viewEntersAnim
         })}>
-        <Jumbotron>
+        {/*<Jumbotron>
           <h1>
             Full ES2015 ReactJS + Bootstrap
           </h1>
@@ -40,7 +40,7 @@ class Home extends PureComponent {
               go to about
             </Link>
           </p>
-        </Jumbotron>
+        </Jumbotron>*/}
         <Graph />
       </div>
     );

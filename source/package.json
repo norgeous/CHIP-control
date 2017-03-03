@@ -92,6 +92,8 @@
     "react-tap-event-plugin": "^2.0.1",
     "socket.io-client": "^1.7.3",
     "superagent": "^3.0.0",
+    "victory": "^0.18.0",
+    "victory-chart": "^18.0.0",
     "whatwg-fetch": "^2.0.1"
   }
 }

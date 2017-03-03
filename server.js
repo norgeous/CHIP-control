@@ -20,16 +20,23 @@ board.on('ready', function() {
   
   var statusLed = new chipio.StatusLed()
   var onboardButton = new chipio.OnboardButton()
-  var thermometer = new chipio.InternalTemperature()
-  var voltmeter = new chipio.BatteryVoltage()
 
+  var thermometer = new chipio.InternalTemperature()
+  var history_temperature = [];
   thermometer.on('change', function(data) {
-    io.emit('temperature', {
-      time: new Date().getTime(),
-      value: data.celsius
-    });
+    if(history_temperature.length<10) history_temperature.push(data.celsius);
+    else {
+      var sum = history_temperature.reduce(function(a, b) { return a + b; });
+      var average = (sum / history_temperature.length).toFixed(2);
+      io.emit('temperature', {
+        time: new Date().getTime(),
+        value: average
+      });
+      history_temperature = [];
+    }
   })
   
+  var voltmeter = new chipio.BatteryVoltage()
   voltmeter.on('change', function(volts) {
     io.emit('voltage', {
       time: new Date().getTime(),
