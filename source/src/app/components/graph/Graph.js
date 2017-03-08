@@ -49,9 +49,9 @@ class Graph extends Component {
 
         <h2>Temperature</h2>
         Received {temperature.length} values, last value: {temperature.length?temperature[temperature.length-1].value:''} °C
-        <VictoryChart width={500} height={200}>
+        <VictoryChart width={500} height={300}>
           <VictoryAxis scale="time"/>
-          <VictoryAxis dependentAxis domain={[0,50]}/>
+          <VictoryAxis dependentAxis domain={[0,60]}/>
           <VictoryLine
             style={{ data: { stroke: "orange", strokeWidth: 5 }}}
             data={temperature}
@@ -64,7 +64,7 @@ class Graph extends Component {
 
         <h2>Voltage</h2>
         Received {voltage.length} values, last value: {voltage.length?voltage[voltage.length-1].value:''} Volts
-        <VictoryChart width={500} height={200}>
+        <VictoryChart width={500} height={300}>
           <VictoryAxis scale="time"/>
           <VictoryAxis dependentAxis domain={[3,4.5]}/>
           <VictoryLine
