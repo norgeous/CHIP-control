@@ -15,8 +15,8 @@ for the graph
 * single press the onboard button to shutdown
 
 ```
-systemc status chip-control
-systemc stop chip-control
+systemctl status chip-control
+systemctl stop chip-control
 ```
 
 #### development
@@ -26,8 +26,6 @@ Setup
 cd /opt/CHIP-control/source
 npm install
 npm rebuild node-sass
-npm install -g node-gyp
-node-gyp rebuild
 ```
 
 Start the webpack hot server
