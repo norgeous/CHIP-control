@@ -53,6 +53,7 @@ board.on('ready', function() {
     statusLed.on()
     setTimeout(function(){statusLed.off()}, 50)
     console.log('button')
+    execSync('init 0')
   })
 
   // socket io server
