@@ -3,8 +3,7 @@ Description=CHIP-control
 After=network.target
 
 [Service]
-WorkingDirectory=/root/CHIP-control
-Environment=NODE_ENV=production PORT=1337
+WorkingDirectory=/opt/CHIP-control
 ExecStart=/usr/bin/node server.js
 Restart=always
 RestartSec=10

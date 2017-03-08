@@ -21,8 +21,7 @@
     "prod-win": "set NODE_ENV=production && webpack -p --config webpack.production.config.js ",
     "start-win": "set NODE_ENV=dev && node server.hot.reload"
   },
-  "keywords": [
-  ],
+  "keywords": [],
   "author": "Erwan DATIN (MacKentoch)",
   "license": "MIT",
   "devDependencies": {

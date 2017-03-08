@@ -1,9 +1,10 @@
-var five = require('johnny-five')
-var chipio = require('chip-io')
-var fs = require('fs')
-var exec = require('child_process').exec
-var execSync = require('child_process').execSync
-var io = require('socket.io')()
+const five = require('johnny-five')
+const chipio = require('chip-io')
+const fs = require('fs')
+const exec = require('child_process').exec
+const execSync = require('child_process').execSync
+const io = require('socket.io')()
+const StaticServer = require('static-server');
 
 var board = new five.Board({
   repl: false,
@@ -54,11 +55,22 @@ board.on('ready', function() {
     console.log('button')
   })
 
+  // socket io server
   io.on('connect', client => {
     console.log('new customer', client.id)
     client.emit('history',datasets);
   })
-  
-  io.listen(3111)
+  io.listen(38917)
+
+  // http server
+  var server = new StaticServer({
+    rootPath: './www',
+    name: 'CHIP-control',
+    port: 38916,
+    cors: '*'
+  })
+  server.start(function () {
+    console.log('Static server listening to', server.port);
+  })
 
 })

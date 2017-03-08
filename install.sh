@@ -8,28 +8,30 @@ fi
 
 if (whiptail --title "CHIP-control install" --yesno "Install CHIP-control?" 15 46) then
 
-  # install git
+  # if no git, install git
   if ! which git >/dev/null; then
     apt install -y git
   fi
 
-  # install node
+  # if no node, install node
   if ! which node >/dev/null; then
-    echo "nodejs is not installed!"
     bash <(curl -sL "https://rawgit.com/norgeous/CHIP-customiser/master/scripts/install_nodejs.sh")
   fi
 
-  bash <(curl -sL "https://rawgit.com/norgeous/CHIP-customiser/master/scripts/configure_status_led.sh")
+  # if no statusled, install statusled
+  if ! which statusled >/dev/null; then
+    bash <(curl -sL "https://rawgit.com/norgeous/CHIP-customiser/master/scripts/configure_status_led.sh")
+  fi
 
   # clone this repo
-  rm -r "/root/CHIP-control/"
-  cd "/root/"
+  rm -r "/opt/CHIP-control/"
+  cd "/opt/"
   git clone "https://github.com/norgeous/CHIP-control.git"
-  cd "/root/CHIP-control/"
+  cd "/opt/CHIP-control/"
   sudo npm install # needs sudo, even as root
 
   # chip-control.service
-  mv "/root/CHIP-control/chip-control.service" "/etc/systemd/system/chip-control.service"
+  cp "/opt/CHIP-control/chip-control.service" "/etc/systemd/system/chip-control.service"
   systemctl enable chip-control
   systemctl restart chip-control
 
