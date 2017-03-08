@@ -4,7 +4,7 @@ import { VictoryChart, VictoryAxis, VictoryLine } from 'victory'
 
 // let socket = io('http://localhost:3111')
 //let socket = io('http://192.168.1.102:3111')
-let socket = io('http://'+window.location.hostname+':3111')
+let socket = io('http://'+window.location.hostname+':38917')
 
 class Graph extends Component {
   
