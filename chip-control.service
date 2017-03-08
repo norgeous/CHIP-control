@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 WorkingDirectory=/opt/CHIP-control
-ExecStart=/usr/bin/node server.js
+ExecStart=/usr/bin/node chip-control-server.js
 Restart=always
 RestartSec=10
 
