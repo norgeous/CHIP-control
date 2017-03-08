@@ -48,12 +48,12 @@ class Graph extends Component {
       <div className="Graph">
 
         <h2>Temperature</h2>
-        {temperature.length}<br/>{temperature.length?temperature[temperature.length-1].value:''}
-        <VictoryChart width={3000} height={600}>
+        Received {temperature.length} values, last value: {temperature.length?temperature[temperature.length-1].value:''} °C
+        <VictoryChart width={500} height={200}>
           <VictoryAxis scale="time"/>
           <VictoryAxis dependentAxis domain={[0,50]}/>
           <VictoryLine
-            style={{ data: { stroke: "orange", strokeWidth: 1 }}}
+            style={{ data: { stroke: "orange", strokeWidth: 5 }}}
             data={temperature}
             x="time"
             y="value"
@@ -63,12 +63,12 @@ class Graph extends Component {
         <br/>
 
         <h2>Voltage</h2>
-        {voltage.length}<br/>{voltage.length?voltage[voltage.length-1].value:''}
-        <VictoryChart width={3000} height={600}>
+        Received {voltage.length} values, last value: {voltage.length?voltage[voltage.length-1].value:''} Volts
+        <VictoryChart width={500} height={200}>
           <VictoryAxis scale="time"/>
-          <VictoryAxis dependentAxis domain={[3.2,4.2]}/>
+          <VictoryAxis dependentAxis domain={[3,4.5]}/>
           <VictoryLine
-            style={{ data: { stroke: "blue" }}}
+            style={{ data: { stroke: "blue", strokeWidth: 5 }}}
             data={voltage}
             x="time"
             y="value"
