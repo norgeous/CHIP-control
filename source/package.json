@@ -22,14 +22,6 @@
     "start-win": "set NODE_ENV=dev && node server.hot.reload"
   },
   "keywords": [
-    "react",
-    "ES6",
-    "ES2015",
-    "bootstrap",
-    "starter",
-    "webpack",
-    "hot-reload",
-    "hot reload"
   ],
   "author": "Erwan DATIN (MacKentoch)",
   "license": "MIT",
@@ -78,7 +70,6 @@
     "babel-polyfill": "^6.16.0",
     "bootstrap": "^3.3.7",
     "classnames": "^2.2.5",
-    "font-awesome": "^4.7.0",
     "jquery": "^2.2.1",
     "react": "^15.4.1",
     "react-bootstrap": "^0.30.7",
