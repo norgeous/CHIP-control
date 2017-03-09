@@ -26,9 +26,7 @@ systemctl stop chip-control
 
 Setup
 ```
-cd /opt/CHIP-control/source
-npm install
-npm rebuild node-sass
+cd /opt/CHIP-control/client/source; npm install; npm rebuild node-sass
 ```
 
 Start the webpack hot server
