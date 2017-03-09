@@ -45,6 +45,7 @@ class Graph extends Component {
     return (
       <div className="Graph">
 
+        <div style={{float:'left'}}>
         <h2>Temperature</h2>
         Received {temperature.length} values, last value: {temperature.length?temperature[temperature.length-1].value:''} °C<br/>
         <VictoryChart width={500} height={300}
@@ -60,62 +61,75 @@ class Graph extends Component {
             y="value"
           />
         </VictoryChart>
+        </div>
 
-        <br/>
 
+
+        <div style={{float:'left'}}>
         <h2>Voltage</h2>
         Received {voltage.length} values, last value: {voltage.length?voltage[voltage.length-1].value:''} Volts<br/>
-        <VictoryChart width={500} height={300}>
+        <VictoryChart width={500} height={300}
+          containerComponent={<VictoryContainer responsive={false}/>}
+        >
           <VictoryAxis scale="time"/>
-          <VictoryAxis dependentAxis domain={[3,4.5]}/>
+          <VictoryAxis dependentAxis domain={[3.0,4.5]}/>
           <VictoryLine
-            style={{ data: { stroke: "blue", strokeWidth: 5 }}}
             data={voltage}
+            domain={{y:[3.0,4.5]}}
             x="time"
             y="value"
+            style={{ data: { stroke: "blue", strokeWidth: 5 }}}
           />
         </VictoryChart>
+        </div>
 
-        <br/>
 
-        <h2>Test</h2>
-        <svg viewBox="0 0 450 350">
+
+        <div style={{float:'left'}}>
+        <h2>Combined</h2>
+        attempt 1<br/>
+        <VictoryChart width={500} height={300}
+          containerComponent={<VictoryContainer responsive={false}/>}
+        >
           <g> 
             <VictoryAxis
-              scale="time"
               standalone={false}
-              style={styles.axisYears}
+              domain={temperature.length?[temperature[0].time, temperature[temperature.length-1].time]:[0,0]}
+              scale="time"
             /> 
 
             <VictoryAxis dependentAxis
+              standalone={false}
               domain={[0, 60]}
               orientation="left"
-              standalone={false}
-              style={{ data: { stroke: "orange", strokeWidth: 5 }}}
+              style={{ axis: { stroke: "orange", strokeWidth: 1 }}}
             />
             <VictoryLine
-              data={temperature}
-              interpolation="monotoneX"
-              scale={{x: "time", y: "linear"}}
               standalone={false}
-              style={{ data: { stroke: "orange", strokeWidth: 5 }}}
+              data={temperature}
+              domain={{y:[0,60]}}
+              x="time"
+              y="value"
+              style={{ data: { stroke: "orange", strokeWidth: 3 }}}
             />
 
             <VictoryAxis dependentAxis
-              domain={[3, 4.5]}
-              orientation="right"
               standalone={false}
-              style={{ data: { stroke: "orange", strokeWidth: 5 }}}
+              domain={[3.0, 4.5]}
+              orientation="right"
+              style={{ axis: { stroke: "blue", strokeWidth: 1 }}}
             />
             <VictoryLine
-              data={voltage}
-              interpolation="monotoneX"
-              scale={{x: "time", y: "linear"}}
               standalone={false}
-              style={{ data: { stroke: "orange", strokeWidth: 5 }}}
+              data={voltage}
+              domain={{y:[3.0,4.5]}}
+              x="time"
+              y="value"
+              style={{ data: { stroke: "blue", strokeWidth: 3 }}}
             />
           </g>
-        </svg>
+        </VictoryChart>
+        </div>
 
 
 
