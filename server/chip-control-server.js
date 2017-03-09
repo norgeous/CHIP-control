@@ -65,7 +65,7 @@ board.on('ready', function() {
 
   // http server
   var server = new StaticServer({
-    rootPath: './www',
+    rootPath: './../client/build',
     name: 'CHIP-control',
     port: 38916,
     cors: '*'

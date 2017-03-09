@@ -3,7 +3,7 @@ Description=CHIP-control
 After=network.target
 
 [Service]
-WorkingDirectory=/opt/CHIP-control
+WorkingDirectory=/opt/CHIP-control/server
 ExecStart=/usr/bin/node chip-control-server.js
 Restart=always
 RestartSec=10
