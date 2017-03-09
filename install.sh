@@ -31,7 +31,7 @@ if (whiptail --title "CHIP-control install" --yesno "Install CHIP-control?" 15 4
   sudo npm install # needs sudo, even as root
 
   # chip-control.service
-  cp "/opt/CHIP-control/chip-control.service" "/etc/systemd/system/chip-control.service"
+  cp "/opt/CHIP-control/server/chip-control.service" "/etc/systemd/system/chip-control.service"
   systemctl enable chip-control
   systemctl restart chip-control
 
