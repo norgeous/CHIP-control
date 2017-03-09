@@ -1,6 +1,7 @@
-import React, { Component, PropTypes }                                              from 'react'
-import io                                                                           from 'socket.io-client'
-import { VictoryContainer, VictoryChart, VictoryAxis, VictoryLine, VictoryTooltip } from 'victory'
+import React, { Component, PropTypes }                                                                       from 'react'
+import io                                                                                                    from 'socket.io-client'
+import { VictoryContainer, VictoryChart, VictoryAxis, VictoryLine, VictoryVoronoiContainer, VictoryTooltip } from 'victory'
+import moment                                                                                                from 'moment'
 
 let socket = io('http://'+window.location.hostname+':38917')
 
@@ -78,7 +79,7 @@ class Graph extends Component {
             domain={{y:[3.0,4.5]}}
             x="time"
             y="value"
-            style={{ data: { stroke: "blue", strokeWidth: 5 }}}
+            style={{ data: { stroke: "blue", strokeWidth: 5 }, labels: {fill: "tomato"}}}
           />
         </VictoryChart>
         </div>
@@ -88,8 +89,14 @@ class Graph extends Component {
         <div style={{float:'left'}}>
         <h2>Combined</h2>
         attempt 1<br/>
+          {/*containerComponent={<VictoryContainer responsive={false}/>}*/}
         <VictoryChart width={500} height={300}
-          containerComponent={<VictoryContainer responsive={false}/>}
+          containerComponent={
+            <VictoryVoronoiContainer dimension="x"
+              labels={(d) => `${moment(d.x).format('hh:mmA')} : ${d.y}`}
+              labelComponent={<VictoryTooltip flyoutStyle={{fill: "white"}}/>}
+            />
+          }
         >
           <g> 
             <VictoryAxis
@@ -110,7 +117,7 @@ class Graph extends Component {
               domain={{y:[0,60]}}
               x="time"
               y="value"
-              style={{ data: { stroke: "orange", strokeWidth: 3 }}}
+              style={{ data: { stroke: "orange", strokeWidth: (d, active) => active ? 4 : 2}, labels: {fill: "orange"} }}
             />
 
             <VictoryAxis dependentAxis
@@ -125,13 +132,61 @@ class Graph extends Component {
               domain={{y:[3.0,4.5]}}
               x="time"
               y="value"
-              style={{ data: { stroke: "blue", strokeWidth: 3 }}}
+              style={{ data: { stroke: "blue", strokeWidth: (d, active) => active ? 4 : 2}, labels: {fill: "blue"} }}
             />
           </g>
         </VictoryChart>
         </div>
 
+          <VictoryChart
+            domainPadding={{y: 2}}
+            containerComponent={
+              <VictoryVoronoiContainer dimension="x" responsive={false}
+                style={{
+                  data: { stroke: "black", strokeWidth: 2 }
+                }}
+                labels={(d) => `y: ${d.y}`}
+                labelComponent={<VictoryTooltip cornerRadius={0} flyoutStyle={{fill: "white"}}/>}
+              />
+            }
+          >
+            <VictoryLine
+              data={[
+                {x: 1, y: 5, l: "one"},
+                {x: 1.5, y: 5, l: "one point five"},
+                {x: 2, y: 4, l: "two"},
+                {x: 3, y: -2, l: "three"}
+              ]}
+              style={{
+                data: { stroke: "tomato", strokeWidth: (d, active) => active ? 4 : 2},
+                labels: {fill: "tomato"}
+              }}
+            />
 
+            <VictoryLine
+              data={[
+                {x: 1, y: -3, l: "red"},
+                {x: 2, y: 5, l: "green"},
+                {x: 3, y: 3, l: "blue"}
+              ]}
+              style={{
+                data: { stroke: "blue", strokeWidth: (d, active) => active ? 4 : 2},
+                labels: {fill: "blue"}
+              }}
+            />
+
+            <VictoryLine
+              data={[
+                {x: 1, y: 5, l: "cat"},
+                {x: 2, y: -4, l: "dog"},
+                {x: 3, y: -2, l: "bird"}
+              ]}
+              style={{
+                data: { stroke: "black", strokeWidth: (d, active) => active ? 4 : 2},
+                labels: {fill: "black"}
+              }}
+            />
+</VictoryChart>
 
 
       </div>
