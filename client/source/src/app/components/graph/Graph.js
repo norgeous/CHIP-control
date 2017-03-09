@@ -1,9 +1,7 @@
-import React, { Component, PropTypes }            from 'react'
-import io                                         from 'socket.io-client'
-import { VictoryChart, VictoryAxis, VictoryLine } from 'victory'
+import React, { Component, PropTypes }                                              from 'react'
+import io                                                                           from 'socket.io-client'
+import { VictoryContainer, VictoryChart, VictoryAxis, VictoryLine, VictoryTooltip } from 'victory'
 
-// let socket = io('http://localhost:3111')
-//let socket = io('http://192.168.1.102:3111')
 let socket = io('http://'+window.location.hostname+':38917')
 
 class Graph extends Component {
@@ -61,9 +59,6 @@ class Graph extends Component {
             x="time"
             y="value"
           />
-          {/*<VictoryVoronoiTooltip
-            labels={(d) => `time: ${d.time} \n degrees c: ${d.value}`}
-          />*/}
         </VictoryChart>
 
         <br/>
