@@ -31,6 +31,6 @@ cd /opt/CHIP-control/client/source; npm install; npm rebuild node-sass
 
 Start the webpack hot server
 ```
-cd /opt/CHIP-control/source
+cd /opt/CHIP-control/client/source
 npm start
 ```
