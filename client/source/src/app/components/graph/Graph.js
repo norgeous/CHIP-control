@@ -18,6 +18,7 @@ class Graph extends Component {
     const me = this
 
     let socket = io('http://'+window.location.hostname+':38917')
+    //let socket = io('http://192.168.1.102:38917')
     
     socket.on('history', o => {
       //console.log('history', o)
@@ -43,48 +44,24 @@ class Graph extends Component {
   
   render() {
 
+    const { temperature, voltage } = this.state
 
 const data = {
   datasets: [{
       type: 'line',
-      label: 'Visitor',
-      data: [{
-                x: 1,
-                y: 0
-            }, {
-                x: 2,
-                y: 10
-            }, {
-                x: 3,
-                y: 5
-            }, {
-                x: 4,
-                y: 5
-            }, {
-                x: 5,
-                y: 50
-            }],
-      yAxisID: 'temperature'
+      label: 'Temperature (C)',
+      data: temperature,
+      yAxisID: 'temperature',
+      backgroundColor: "red",
+      borderColor: "red"
     },{
-      label: 'Sales',
       type:'line',
-      data: [{
-                x: 1,
-                y: 3.5
-            }, {
-                x: 2,
-                y: 4
-            }, {
-                x: 3,
-                y: 3.2
-            }, {
-                x: 4,
-                y: 3.2
-            }, {
-                x: 5,
-                y: 3.2
-            }],
-      yAxisID: 'voltage'
+      label: 'Voltage (V)',
+      data: voltage,
+      yAxisID: 'voltage',
+      backgroundColor: "orange",
+      borderColor: "orange"
+
     }]
 };
 
@@ -138,11 +115,11 @@ const options = {
   }
 };
 
+console.log(temperature)
 
-
-    const { temperature, voltage } = this.state
     return (
       <div className="Graph">
+        {temperature.length}
         <Line data={data} options={options} />
       </div>
     )
