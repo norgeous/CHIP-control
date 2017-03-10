@@ -46,39 +46,45 @@ class Graph extends Component {
 
 const data = {
   datasets: [{
-      label: 'Sales',
-      type:'line',
-      data: [{
-                x: -5,
-                y: -10
-            }, {
-                x: 1,
-                y: 10
-            }, {
-                x: 15,
-                y: 49
-            }],
-      yAxisID: 'y-axis-2'
-    },{
       type: 'line',
       label: 'Visitor',
       data: [{
-                x: -10,
+                x: 1,
                 y: 0
             }, {
-                x: 0,
+                x: 2,
                 y: 10
             }, {
-                x: 10,
+                x: 3,
                 y: 5
             }, {
-                x: 20,
+                x: 4,
                 y: 5
             }, {
-                x: 30,
+                x: 5,
                 y: 50
             }],
-      yAxisID: 'y-axis-1'
+      yAxisID: 'temperature'
+    },{
+      label: 'Sales',
+      type:'line',
+      data: [{
+                x: 1,
+                y: 3.5
+            }, {
+                x: 2,
+                y: 4
+            }, {
+                x: 3,
+                y: 3.2
+            }, {
+                x: 4,
+                y: 3.2
+            }, {
+                x: 5,
+                y: 3.2
+            }],
+      yAxisID: 'voltage'
     }]
 };
 
@@ -98,38 +104,34 @@ const options = {
       {
         type: 'linear',
         position: 'bottom',
-        display: true,
         gridLines: {
           display: false
-        },
-        labels: {
-          show: true
         }
       }
     ],
     yAxes: [
       {
         type: 'linear',
-        display: true,
         position: 'left',
-        id: 'y-axis-1',
+        id: 'temperature',
+        ticks: {
+          suggestedMin: 0,
+          suggestedMax: 100
+        },
         gridLines: {
           display: false
-        },
-        labels: {
-          show: true
         }
       },
       {
         type: 'linear',
-        display: true,
         position: 'right',
-        id: 'y-axis-2',
+        id: 'voltage',
+        ticks: {
+          suggestedMin: 3,
+          suggestedMax: 4.5
+        },
         gridLines: {
           display: false
-        },
-        labels: {
-          show: true
         }
       }
     ]

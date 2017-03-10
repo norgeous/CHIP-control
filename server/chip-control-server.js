@@ -36,8 +36,8 @@ board.on('ready', function() {
         var average = parseFloat((sum / datasets[to].batch.length).toFixed(2))
         datasets[to].batch = []
         var o = {
-          time: batch_start,
-          value: average
+          x: batch_start,
+          y: average
         }
         datasets[to].record.push(o)
         console.log(to, o)
