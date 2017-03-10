@@ -3,8 +3,6 @@ import io                              from 'socket.io-client'
 import moment                          from 'moment'
 import { Line }                        from 'react-chartjs-2'
 
-let socket = io('http://'+window.location.hostname+':38917')
-
 class Graph extends Component {
   
   constructor(props) {
@@ -19,6 +17,8 @@ class Graph extends Component {
   componentDidMount() {
     const me = this
 
+    let socket = io('http://'+window.location.hostname+':38917')
+    
     socket.on('history', o => {
       //console.log('history', o)
       me.setState({
