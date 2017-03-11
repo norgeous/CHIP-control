@@ -69,7 +69,13 @@ const data = {
 const options = {
   responsive: true,
   tooltips: {
-    mode: 'label'
+    mode: 'nearest',
+    intersect: false,
+    callbacks: {
+      title: function(tooltipItem, data) {
+        return moment(tooltipItem[0].xLabel).format('Do MMMM Y - hh:mm:ss A');
+      }
+    }
   },
   elements: {
     line: {
@@ -79,7 +85,7 @@ const options = {
   scales: {
     xAxes: [
       {
-        type: 'linear',
+        type: 'time',
         position: 'bottom',
         gridLines: {
           display: false
@@ -104,8 +110,8 @@ const options = {
         position: 'right',
         id: 'voltage',
         ticks: {
-          suggestedMin: 3,
-          suggestedMax: 4.5
+          suggestedMin: 3.2,
+          suggestedMax: 4.2
         },
         gridLines: {
           display: false
@@ -115,7 +121,7 @@ const options = {
   }
 };
 
-console.log(temperature)
+//console.log(temperature)
 
     return (
       <div className="Graph">
