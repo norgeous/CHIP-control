@@ -6,7 +6,6 @@ const execSync = require('child_process').execSync
 const io = require('socket.io')()
 const StaticServer = require('static-server')
 
-var lcd = false
 
 var board = new five.Board({
   repl: false,
@@ -21,6 +20,9 @@ board.on('ready', function() {
   var onboardButton = new chipio.OnboardButton()
   var thermometer = new chipio.InternalTemperature()
   var voltmeter = new chipio.BatteryVoltage()
+  
+  // lcd setup
+  var lcd = false
   if(lcd) var lcd = new five.LCD({controller: "PCF8574T", address: 0x3f, bus: 1, rows: 2, cols: 16})
   
   // history
@@ -29,10 +31,19 @@ board.on('ready', function() {
     voltage:     { last: 0, batch: [], record: [] }
   }
 
-  //add function, records averages of timed batches of results 
+  //add function, records averages of timed batches of results
   function add(to, value) {
     if(value !== 0) {
-      if(lcd) lcd.clear().cursor(0,0).print(to+' '+value)
+      if(lcd) {
+        switch(to) {
+          case 'temperature':
+            lcd.cursor(0,0).print(value+' C')
+            break
+          case 'voltage':
+            lcd.cursor(1,0).print(value+' Volts')
+            break
+        }
+      }
       var now = new Date().getTime()
       var batch_duration = 60 * 1000
       var batch_start = now - (now % batch_duration)
@@ -54,7 +65,7 @@ board.on('ready', function() {
   }
 
   //add thermometer / voltmeter
-  thermometer.on('change', data => add('temperature', data.celsius)
+  thermometer.on('change', data => add('temperature', data.celsius))
   voltmeter.on('change', volts => add('voltage', volts))
   
   // one press button to shutdown
@@ -80,7 +91,5 @@ board.on('ready', function() {
     cors: '*'
   })
   server.start(function () {console.log('Static server listening to', server.port)})
-
-
 
 })
