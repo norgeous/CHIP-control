@@ -110,8 +110,8 @@ const options = {
         position: 'right',
         id: 'voltage',
         ticks: {
-          suggestedMin: 3.2,
-          suggestedMax: 4.2
+          suggestedMin: 3,
+          suggestedMax: 4.4
         },
         gridLines: {
           display: false
