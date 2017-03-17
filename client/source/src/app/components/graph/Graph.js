@@ -11,6 +11,8 @@ class Graph extends Component {
     this.state = {
       temperature: [],
       voltage: [],
+      amps1: [],
+      amps2: []
     }
   }
 
@@ -24,21 +26,16 @@ class Graph extends Component {
       //console.log('history', o)
       me.setState({
         temperature: o.temperature.record,
-        voltage: o.voltage.record
+        voltage: o.voltage.record,
+        amps1: o.amps1.record,
+        amps2: o.amps2.record
       })
     })
 
-    socket.on('temperature', o => {
-      me.setState({
-        temperature: me.state.temperature.concat([o])
-      })
-    })
-    
-    socket.on('voltage', o => {
-      me.setState({
-        voltage: me.state.voltage.concat([o])
-      })
-    })
+    socket.on('temperature', o => {me.setState({temperature: me.state.temperature.concat([o])})})
+    socket.on('voltage', o => {me.setState({voltage: me.state.voltage.concat([o])})})
+    socket.on('amps1', o => {me.setState({amps1: me.state.amps1.concat([o])})})
+    socket.on('amps2', o => {me.setState({amps2: me.state.amps2.concat([o])})})
 
   }
   
@@ -61,7 +58,6 @@ const data = {
       yAxisID: 'voltage',
       backgroundColor: "orange",
       borderColor: "orange"
-
     }]
 };
 
@@ -125,7 +121,10 @@ const options = {
 
     return (
       <div className="Graph">
-        {temperature.length}
+        temperature: {temperature.length}<br/>
+        voltage: {voltage.length}<br/>
+        amps1: {amps1.length}<br/>
+        amps2: {amps2.length}<br/>
         <Line data={data} options={options} />
       </div>
     )

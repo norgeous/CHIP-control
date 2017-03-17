@@ -20,6 +20,8 @@ board.on('ready', function() {
   var onboardButton = new chipio.OnboardButton()
   var thermometer = new chipio.InternalTemperature()
   var voltmeter = new chipio.BatteryVoltage()
+  var amps1 = new chipio.BatteryCharge()
+  var amps2 = new chipio.BatteryDischarge()
   
   // lcd setup
   var lcd = false
@@ -28,7 +30,9 @@ board.on('ready', function() {
   // history
   var datasets = {
     temperature: { last: 0, batch: [], record: [] },
-    voltage:     { last: 0, batch: [], record: [] }
+    voltage:     { last: 0, batch: [], record: [] },
+    amps1:       { last: 0, batch: [], record: [] },
+    amps2:       { last: 0, batch: [], record: [] }
   }
 
   //add function, records averages of timed batches of results
@@ -37,10 +41,16 @@ board.on('ready', function() {
       if(lcd) {
         switch(to) {
           case 'temperature':
-            lcd.cursor(0,0).print(value+' C')
+            lcd.cursor(0,0).print(value.toFixed(1)+' C')
             break
           case 'voltage':
-            lcd.cursor(1,0).print(value+' Volts')
+            lcd.cursor(1,0).print(value+' V         ')
+            break
+          case 'amps1':
+            lcd.cursor(1,0).print(value+' mA in')
+            break
+          case 'amps2':
+            lcd.cursor(1,0).print(value+' mA out')
             break
         }
       }
@@ -67,12 +77,15 @@ board.on('ready', function() {
   //add thermometer / voltmeter
   thermometer.on('change', data => add('temperature', data.celsius))
   voltmeter.on('change', volts => add('voltage', volts))
+  amps1.on('change', amps => add('amps1', amps))
+  amps2.on('change', amps => add('amps2', amps))
   
   // one press button to shutdown
   onboardButton.on('up', function() {
     statusLed.on()
     setTimeout(function(){statusLed.off()}, 50)
     console.log('button')
+    if(lcd) lcd.clear().cursor(0,0).print('Shutdown')
     execSync('init 0')
   })
 
