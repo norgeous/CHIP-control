@@ -37,40 +37,38 @@ board.on('ready', function() {
 
   //add function, records averages of timed batches of results
   function add(to, value) {
-    if(value !== 0) {
-      if(lcd) {
-        switch(to) {
-          case 'temperature':
-            lcd.cursor(0,0).print(value.toFixed(1)+'C')
-            break
-          case 'voltage':
-            lcd.cursor(1,0).print(value.toFixed(4)+'V')
-            break
-          case 'amps1':
-            lcd.cursor(1,8).print('>'+value.toFixed(1)+'mA    ')
-            break
-          case 'amps2':
-            lcd.cursor(1,8).print('<'+value.toFixed(1)+'mA    ')
-            break
-        }
+    if(lcd) {
+      switch(to) {
+        case 'temperature':
+          lcd.cursor(0,0).print(value.toFixed(1)+'C')
+          break
+        case 'voltage':
+          lcd.cursor(1,0).print(value.toFixed(4)+'V')
+          break
+        case 'amps1':
+          lcd.cursor(1,8).print('>'+value.toFixed(1)+'mA    ')
+          break
+        case 'amps2':
+          lcd.cursor(1,8).print('<'+value.toFixed(1)+'mA    ')
+          break
       }
-      var now = new Date().getTime()
-      var batch_duration = 60 * 1000
-      var batch_start = now - (now % batch_duration)
-      datasets[to].batch.push(value)
-      if(datasets[to].last !== batch_start) {
-        datasets[to].last = batch_start
-        var sum = datasets[to].batch.reduce(function(a, b) { return a + b })
-        var average = parseFloat((sum / datasets[to].batch.length).toFixed(2))
-        datasets[to].batch = []
-        console.log(to, average)
-        var o = {
-          x: batch_start,
-          y: average
-        }
-        datasets[to].record.push(o)
-        io.emit(to, o)
+    }
+    var now = new Date().getTime()
+    var batch_duration = 60 * 1000
+    var batch_start = now - (now % batch_duration)
+    datasets[to].batch.push(value)
+    if(datasets[to].last !== batch_start) {
+      datasets[to].last = batch_start
+      var sum = datasets[to].batch.reduce(function(a, b) { return a + b })
+      var average = parseFloat((sum / datasets[to].batch.length).toFixed(2))
+      datasets[to].batch = []
+      console.log(to, average)
+      var o = {
+        x: batch_start,
+        y: average
       }
+      datasets[to].record.push(o)
+      io.emit(to, o)
     }
   }
 
