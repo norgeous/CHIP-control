@@ -43,81 +43,140 @@ class Graph extends Component {
 
     const { temperature, voltage, amps1, amps2 } = this.state
 
-const data = {
-  datasets: [{
-      type: 'line',
-      label: 'Temperature (C)',
-      data: temperature,
-      yAxisID: 'temperature',
-      backgroundColor: "red",
-      borderColor: "red"
-    },{
-      type:'line',
-      label: 'Voltage (V)',
-      data: voltage,
-      yAxisID: 'voltage',
-      backgroundColor: "orange",
-      borderColor: "orange"
-    }]
-};
-
-
-const options = {
-  responsive: true,
-  tooltips: {
-    mode: 'nearest',
-    intersect: false,
-    callbacks: {
-      title: function(tooltipItem, data) {
-        return moment(tooltipItem[0].xLabel).format('Do MMMM Y - hh:mm:ss A');
-      }
+    const data = {
+      datasets: [{
+          type: 'line',
+          label: 'Temperature (C)',
+          data: temperature,
+          yAxisID: 'temperature',
+          backgroundColor: "red",
+          borderColor: "red"
+        }]
     }
-  },
-  elements: {
-    line: {
-      fill: false
-    }
-  },
-  scales: {
-    xAxes: [
-      {
-        type: 'time',
-        position: 'bottom',
-        gridLines: {
-          display: false
-        }
-      }
-    ],
-    yAxes: [
-      {
-        type: 'linear',
-        position: 'left',
-        id: 'temperature',
-        ticks: {
-          suggestedMin: 0,
-          suggestedMax: 100
-        },
-        gridLines: {
-          display: false
+
+    const options = {
+      responsive: true,
+      tooltips: {
+        mode: 'nearest',
+        intersect: false,
+        callbacks: {
+          title: function(tooltipItem, data) {
+            return moment(tooltipItem[0].xLabel).format('Do MMMM Y - hh:mm A')
+          }
         }
       },
-      {
-        type: 'linear',
-        position: 'right',
-        id: 'voltage',
-        ticks: {
-          suggestedMin: 3,
-          suggestedMax: 4.4
-        },
-        gridLines: {
-          display: false
+      elements: {
+        line: {
+          fill: false
         }
+      },
+      scales: {
+        xAxes: [
+          {
+            type: 'time',
+            position: 'bottom',
+            gridLines: {
+              display: false
+            }
+          }
+        ],
+        yAxes: [
+          {
+            type: 'linear',
+            position: 'left',
+            id: 'temperature',
+            ticks: {
+              suggestedMin: 0,
+              suggestedMax: 100
+            },
+            gridLines: {
+              display: false
+            }
+          }
+        ]
       }
-    ]
-  }
-};
+    }
 
-//console.log(temperature)
+
+    const data2 = {
+      datasets: [{
+          type:'line',
+          label: 'Voltage (V)',
+          data: voltage,
+          yAxisID: 'voltage',
+          backgroundColor: "violet",
+          borderColor: "violet"
+        },{
+          type: 'line',
+          label: 'Current In (mA)',
+          data: amps1,
+          yAxisID: 'amps',
+          backgroundColor: "indigo",
+          borderColor: "indigo"
+        },{
+          type: 'line',
+          label: 'Current Out (mA)',
+          data: amps2,
+          yAxisID: 'amps',
+          backgroundColor: "orange",
+          borderColor: "orange"
+        }]
+    }
+
+    const options2 = {
+      responsive: true,
+      tooltips: {
+        mode: 'nearest',
+        intersect: false,
+        callbacks: {
+          title: function(tooltipItem, data) {
+            return moment(tooltipItem[0].xLabel).format('Do MMMM Y - hh:mm A')
+          }
+        }
+      },
+      elements: {
+        line: {
+          fill: false
+        }
+      },
+      scales: {
+        xAxes: [
+          {
+            type: 'time',
+            position: 'bottom',
+            gridLines: {
+              display: false
+            }
+          }
+        ],
+        yAxes: [
+          {
+            type: 'linear',
+            position: 'left',
+            id: 'voltage',
+            ticks: {
+              suggestedMin: 3,
+              suggestedMax: 4.4
+            },
+            gridLines: {
+              display: false
+            }
+          },
+          {
+            type: 'linear',
+            position: 'right',
+            id: 'amps',
+            ticks: {
+              suggestedMin: 0,
+              suggestedMax: 300
+            },
+            gridLines: {
+              display: false
+            }
+          }
+        ]
+      }
+    }
 
     return (
       <div className="Graph">
@@ -125,7 +184,8 @@ const options = {
         voltage: {voltage.length}<br/>
         amps1: {amps1.length}<br/>
         amps2: {amps2.length}<br/>
-        <Line data={data} options={options} />
+        <div style={{width:'50%',float:'left',padding:'40px'}}><Line data={data} options={options} /></div>
+        <div style={{width:'50%',float:'left',padding:'40px'}}><Line data={data2} options={options2} /></div>
       </div>
     )
   }

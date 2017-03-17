@@ -41,16 +41,16 @@ board.on('ready', function() {
       if(lcd) {
         switch(to) {
           case 'temperature':
-            lcd.cursor(0,0).print('C '+value.toFixed(1))
+            lcd.cursor(0,0).print(value.toFixed(1)+'C')
             break
           case 'voltage':
-            lcd.cursor(1,0).print('V '+value.toFixed(4))
+            lcd.cursor(1,0).print(value.toFixed(4)+'V')
             break
           case 'amps1':
-            lcd.cursor(1,9).print('A>'+value.toFixed(1))
+            lcd.cursor(1,8).print('>'+value.toFixed(1)+'mA    ')
             break
           case 'amps2':
-            lcd.cursor(1,9).print('A<'+value.toFixed(1))
+            lcd.cursor(1,8).print('<'+value.toFixed(1)+'mA    ')
             break
         }
       }
@@ -85,7 +85,7 @@ board.on('ready', function() {
     statusLed.on()
     setTimeout(function(){statusLed.off()}, 50)
     console.log('button')
-    if(lcd) lcd.clear().cursor(0,0).print('Shutdown')
+    if(lcd) lcd.clear().cursor(0,5).print('Shutdown')
     execSync('init 0')
   })
 
