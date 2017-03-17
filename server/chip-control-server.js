@@ -41,16 +41,16 @@ board.on('ready', function() {
       if(lcd) {
         switch(to) {
           case 'temperature':
-            lcd.cursor(0,0).print(value.toFixed(1)+' C')
+            lcd.cursor(0,0).print('C'+value.toFixed(1))
             break
           case 'voltage':
-            lcd.cursor(1,0).print(value+' V         ')
+            lcd.cursor(1,0).print('V'+value.toFixed(4))
             break
           case 'amps1':
-            lcd.cursor(1,0).print(value+' mA in')
+            lcd.cursor(0,8).print('A>'+value.toFixed(1))
             break
           case 'amps2':
-            lcd.cursor(1,0).print(value+' mA out')
+            lcd.cursor(1,8).print('A<'+value.toFixed(1))
             break
         }
       }
