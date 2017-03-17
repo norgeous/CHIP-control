@@ -20,7 +20,6 @@
   },
   "homepage": "https://github.com/norgeous/CHIP-control#readme",
   "dependencies": {
-    //"chip-io": "git+https://git@github.com/sandeepmistry/node-chip-io.git",
     "chip-io": "git+https://git@github.com/norgeous/node-chip-io.git#batteryamps",
     "johnny-five": "^0.10.6",
     "moment": "^2.17.1",
