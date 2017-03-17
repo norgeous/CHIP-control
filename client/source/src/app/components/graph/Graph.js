@@ -41,7 +41,7 @@ class Graph extends Component {
   
   render() {
 
-    const { temperature, voltage } = this.state
+    const { temperature, voltage, amps1, amps2 } = this.state
 
 const data = {
   datasets: [{
