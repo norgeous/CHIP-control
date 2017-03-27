@@ -35,6 +35,13 @@ board.on('ready', function() {
     amps2:       { last: 0, batch: [], record: [] }
   }
 
+  //zero padding
+  function pad(n, width, z) {
+    z = z || '0';
+    n = n + '';
+    return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+  }
+
   //add function, records averages of timed batches of results
   function add(to, value) {
     if(lcd) {
@@ -46,10 +53,10 @@ board.on('ready', function() {
           lcd.cursor(1,0).print(value.toFixed(4)+'V')
           break
         case 'amps1':
-          lcd.cursor(0,8).print('>'+value.toFixed(1)+'mA    ')
+          lcd.cursor(0,8).print('>'+pad(value.toFixed(1),5)+'mA    ')
           break
         case 'amps2':
-          lcd.cursor(1,8).print('<'+value.toFixed(1)+'mA    ')
+          lcd.cursor(1,8).print('<'+pad(value.toFixed(1),5)+'mA    ')
           break
       }
     }
