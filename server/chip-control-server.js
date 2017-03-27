@@ -46,7 +46,7 @@ board.on('ready', function() {
           lcd.cursor(1,0).print(value.toFixed(4)+'V')
           break
         case 'amps1':
-          lcd.cursor(1,8).print('>'+value.toFixed(1)+'mA    ')
+          lcd.cursor(0,8).print('>'+value.toFixed(1)+'mA    ')
           break
         case 'amps2':
           lcd.cursor(1,8).print('<'+value.toFixed(1)+'mA    ')
